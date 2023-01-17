@@ -4,7 +4,7 @@ import * as effectsdk from "@effectai/effect-js";
 import Web3 from "web3";
 import { useContext, useState } from "react";
 import Link from "next/link";
-import { useApp } from "../context/appContext";
+import { useApp } from "../../context/appContext";
 
 const campaignToIpfs = {
   title: "TheTestCampaign",
