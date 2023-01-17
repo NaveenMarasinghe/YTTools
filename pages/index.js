@@ -137,7 +137,7 @@ export default function Home() {
               Crowdsource your YouTube tasks
             </h1>
             <p className="py-6">
-              Perfome time consuming YouTube channel tasks such as creating
+              Perform time consuming YouTube channel tasks such as creating
               chapters, subtitles, thumbnails using
               <span style={{ color: "#5158fa" }}> Effect Task Force</span>.
             </p>
