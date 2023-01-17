@@ -1,99 +1,23 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useApp } from "../../context/appContext";
 
 export default function Create() {
   const { cxtAddress, login } = useApp();
+  const [youtubeUrl, setYoutubeUrl] = useState();
+
+  const onYouTubeUrlChange = (url) => {
+    let text = url.substr(32, 11);
+    setYoutubeUrl(text);
+  };
+
   return (
     <div>
       <div className="navbar bg-base-100 fixed">
         <div className="navbar-start">
-          <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li tabIndex={0}>
-                <a className="justify-between">
-                  Parent
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                  </svg>
-                </a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
-            </ul>
-          </div>
           <Link href={"/"} legacyBehavior>
             <a className="btn btn-ghost normal-case text-xl">YouTube Tools</a>
           </Link>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li tabIndex={0}>
-              <a>
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
         </div>
 
         <div className="navbar-end">
@@ -104,6 +28,59 @@ export default function Create() {
           ) : (
             <></>
           )}
+        </div>
+      </div>
+      <div className="flex">
+        <div className="flex mt-16 min-h-full min-w-full">
+          <ul className="menu bg-base-100 w-56 p-2">
+            <li>
+              <a>Create</a>
+            </li>
+            <li>
+              <a>View</a>
+            </li>
+          </ul>
+          <div className="bg-violet-700 w-full rounded-md m-4 flex-col">
+            <div className="text-center text-black text-3xl my-2 font-bold">
+              Create New Task
+            </div>
+            <div className="flex justify-center my-2">
+              {youtubeUrl && (
+                <iframe
+                  width="560"
+                  height="315"
+                  src={"https://www.youtube.com/embed/" + youtubeUrl}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              )}
+              {!youtubeUrl && (
+                <div style={{ width: "560px", height: "315px" }}>
+                  <img src="https://i.imgur.com/06CGCNl.jpeg"></img>
+                </div>
+              )}
+            </div>
+            <div className="text-center text-black font-medium">
+              Add YouTube URL below
+            </div>
+            <div className="text-center my-2">
+              <input
+                type="text"
+                placeholder="Youtube URL"
+                className="input w-full max-w-xs"
+                onChange={(e) => {
+                  onYouTubeUrlChange(e.target.value);
+                }}
+              />
+            </div>
+            <div className="text-center my-2">
+              <button className="btn btn-primary" onClick={() => buttonClick()}>
+                Create
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
